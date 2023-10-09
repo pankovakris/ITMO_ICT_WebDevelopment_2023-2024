@@ -1,6 +1,7 @@
 import socket
 import urllib.parse
 
+
 class MyHTTPServer:
     def __init__(self, host, port):
         self.host = host
