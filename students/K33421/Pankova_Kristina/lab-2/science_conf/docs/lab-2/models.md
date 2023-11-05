@@ -1,37 +1,6 @@
-from django.db import models
-
-from django.contrib.auth.models import AbstractUser
-
-from django.conf import settings
-from django.core.exceptions import ValidationError
-
-CONFERENCE_ROLE_CHOICES = [
-    ("AT", "Attendee"),
-    ("SP", "Speaker"),
-    ("OG", "Organiser"),
-    ("SO", "Sponsor"),
-]
-
-CONFERENCE_TYPE_CHOICES = [
-    ("SC", "Science"),
-    ("HU", "Humanities"),
-    ("AR", "Art"),
-]
-
-RATING_CHOICES = [
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10),
-]
-
-
+## Models
+Модель посетителя конференции
+```python
 class ConferenceGuest(AbstractUser):
     birth_date = models.DateField(null=True)
     conferences = models.ManyToManyField('Conference', through='ConferenceAttendance', through_fields=('guest', 'conference'))
@@ -41,8 +10,10 @@ class ConferenceGuest(AbstractUser):
 
     class Meta:
         ordering = ['id']
+```
 
-
+Модель конференции
+```python
 class Conference(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(
@@ -64,8 +35,10 @@ class Conference(models.Model):
 
     class Meta:
         ordering = ['id']
+```
 
-
+Модель посетителя на конкретной конференции, нужна для обозначения роли
+```python
 class ConferenceAttendance(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
     guest = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -82,8 +55,10 @@ class ConferenceAttendance(models.Model):
 
     class Meta:
         ordering = ['id']
+```
 
-
+Модель для комментариев о конференции
+```python
 class ConferenceComments(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
@@ -100,8 +75,10 @@ class ConferenceComments(models.Model):
 
     class Meta:
         ordering = ['id']
+```
 
-
+Модель лекции на конференции
+```python
 class ConferenceLectures(models.Model):
     lecturer = models.ForeignKey(ConferenceAttendance, on_delete=models.CASCADE)
     conference = models.ForeignKey(Conference,on_delete=models.CASCADE)
@@ -114,4 +91,4 @@ class ConferenceLectures(models.Model):
 
     class Meta:
         ordering = ['id']
-
+```
