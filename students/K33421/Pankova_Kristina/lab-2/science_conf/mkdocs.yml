@@ -56,6 +56,13 @@ nav:
           - mkdocs/settings/plugins.md
           - mkdocs/settings/final.md
       - mkdocs/ghpages.md
+  - "№1: Lab 1":
+      - lab-1/1.md
+      - lab-1/2.md
+      - lab-1/3.md
+      - lab-1/4.md
+      - lab-1/5.md
+
   - "№2: Django":
       - lab-2/index.md
       - lab-2/models.md
