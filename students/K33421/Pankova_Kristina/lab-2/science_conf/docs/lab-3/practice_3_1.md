@@ -107,7 +107,10 @@ DriversLicence.objects.aggregate(oldest_licence=Min('given_at'))
 
 Укажите самую позднюю дату владения машиной, имеющую какую-то из существующих моделей в вашей базе
 
-
+```python
+CarOwnership.objects.filter(car__model__icontains='Kia Rio').aggregate(oldest_ownership=Max('date_begin'))
+```
+![Скриншот:](images/practice_3_1_0.png)
 
 Выведите количество машин для каждого водителя
 
@@ -131,7 +134,7 @@ Car.objects.values("model").annotate(Count("id"))
 Отсортируйте всех автовладельцев по дате выдачи удостоверения (Примечание: чтобы не выводить несколько раз одни и те же таблицы воспользуйтесь методом .distinct()
 
 ```python
- DriversLicence.objects.order_by("given_at")           
+CarOwner.objects.order_by('owner_licence__given_at')
 ```
 
-![Скриншот:](images/practice_3_1_9.png)
+![Скриншот:](images/practice_3_1_11.png)

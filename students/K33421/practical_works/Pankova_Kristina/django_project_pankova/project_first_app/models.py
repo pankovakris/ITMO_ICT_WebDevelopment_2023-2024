@@ -12,6 +12,9 @@ class CarOwner(AbstractUser):
     cars = models.ManyToManyField('Car', through='CarOwnership')
     birth_date = models.DateField(null=True)
 
+    def __str__(self):
+        return f'{self.passport}'
+
     class Meta:
         ordering = ['id']
 
@@ -30,7 +33,7 @@ class Car(models.Model):
 
 
 class DriversLicence(models.Model):
-    owner_car = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    owner_car = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='owner_licence')
     licence_number = models.CharField(max_length=10)
     type = models.CharField(max_length=10)
     given_at = models.DateField()
@@ -43,7 +46,7 @@ class DriversLicence(models.Model):
 
 class CarOwnership(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='owner_car')
     date_begin = models.DateField()
     date_end = models.DateField(null=True)
 
