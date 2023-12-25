@@ -63,9 +63,15 @@ nav:
       - lab-1/4.md
       - lab-1/5.md
 
-  - "№2: Django":
+  - "№2: Lab 2 Django":
       - lab-2/index.md
       - lab-2/models.md
       - lab-2/forms.md
+      - lab-2/views.md
+      - lab-2/urls.md
+
+  - "№3: Lab 3":
+      - lab-2/practice_3_1.md
+      - lab-2/models.md
       - lab-2/views.md
       - lab-2/urls.md
