@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 SALON_TYPE_CHOICES = [
     ("GB", "General beauty"),
@@ -24,7 +24,6 @@ RATING_CHOICES = [
 
 
 class Customer(User):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=11)
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -33,7 +32,6 @@ class Customer(User):
         ordering = ['id']
 
 class SalonOwner(User):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=11)
 
     def __str__(self):
@@ -78,28 +76,12 @@ class SalonComments(models.Model):
     class Meta:
         ordering = ['id']
 
-class SalonComments(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
-    text = models.CharField(max_length=555)
-    rating = models.IntegerField(
-        choices=RATING_CHOICES,
-        default=None,
-        null=True
-    )
-    sent_at = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.customer}'s comment of {self.salon}"
-
-    class Meta:
-        ordering = ['id']
-
 
 class SalonService(models.Model):
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500, null=True, blank=True)
+    price = models.IntegerField()
 
     def __str__(self):
         return f"{self.name}' at {self.salon}"
@@ -111,7 +93,6 @@ class SalonAppointment(models.Model):
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     service = models.ForeignKey(SalonService, on_delete=models.CASCADE)
-    payment = models.IntegerField()
     datetime = models.DateTimeField()
 
     def __str__(self):

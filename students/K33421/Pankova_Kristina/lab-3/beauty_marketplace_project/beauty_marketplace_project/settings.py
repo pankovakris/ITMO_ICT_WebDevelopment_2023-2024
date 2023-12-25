@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+os.environ["PATH"] += os.pathsep + 'C:/Program Files/Graphviz/bin/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +29,8 @@ SECRET_KEY = 'django-insecure-eb*1t2cz(ngp1j6lc#@3*pxic%v9)1uu_5!#4y%wa7!9wt-lvg
 DEBUG = True
 
 ALLOWED_HOSTS = []
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+#AUTH_USER_MODEL = 'beauty_marketplace_app.AbstractUser'
 
 
 # Application definition
@@ -37,7 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'beauty_marketplace_app',
+    'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'drf_yasg',
 ]
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'graph_models': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +70,7 @@ ROOT_URLCONF = 'beauty_marketplace_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +92,7 @@ WSGI_APPLICATION = 'beauty_marketplace_project.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'beauty_db',
+            'NAME': 'beauty_marketplace',
             'USER': 'postgres',
             'PASSWORD': '1234',
             'HOST': '127.0.0.1',
@@ -103,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
