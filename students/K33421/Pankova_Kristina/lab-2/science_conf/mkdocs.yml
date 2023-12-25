@@ -71,7 +71,7 @@ nav:
       - lab-2/urls.md
 
   - "№3: Lab 3":
-      - lab-2/practice_3_1.md
-      - lab-2/models.md
-      - lab-2/views.md
-      - lab-2/urls.md
+      - lab-3/practice_3_1.md
+      - lab-3/models.md
+      - lab-3/views.md
+      - lab-3/urls.md
