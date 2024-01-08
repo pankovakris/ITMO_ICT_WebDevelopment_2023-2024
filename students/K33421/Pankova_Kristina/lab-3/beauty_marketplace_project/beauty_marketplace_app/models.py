@@ -26,7 +26,7 @@ RATING_CHOICES = [
 class Customer(User):
     phone_number = models.CharField(max_length=11)
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.username}'
 
     class Meta:
         ordering = ['id']

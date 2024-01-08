@@ -1,14 +1,16 @@
-// store.js
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createApp } from 'vue'
+import App from './App.vue'
+import './assets/main.css'
+import router from "./router";
 import axios from 'axios';
 
-Vue.use(Vuex);
+import { createStore } from 'vuex'
 
-export default new Vuex.Store({
+// Create a new store instance.
+const store = createStore({
   state: {
     isAuthenticated: false,
-    user: null
+    user: ''
   },
   mutations: {
     setAuthentication(state, status) {
@@ -26,7 +28,8 @@ export default new Vuex.Store({
        axios.post('http://127.0.0.1:8000/salon/api/login/', userData)
          .then(response => {
            commit('setAuthentication', true);
-           commit('setUser', response.data.user);
+           console.log(response);
+           commit('setUser', response.data);
          })
          .catch(error => {
            console.error('Login failed', error);
@@ -36,7 +39,7 @@ export default new Vuex.Store({
       // Make the API call to log out the user
       // If logout is successful, set isAuthenticated to false and clear user data
       // For example:
-       axios.post('http://127.0.0.1:8000/salon/api/login/')
+       axios.post('http://127.0.0.1:8000/salon/api/logout/')
          .then(() => {
            commit('setAuthentication', false);
            commit('setUser', null);
@@ -47,3 +50,9 @@ export default new Vuex.Store({
     }
   }
 });
+
+
+createApp(App).use(router).use(store).mount('#app');
+
+
+
