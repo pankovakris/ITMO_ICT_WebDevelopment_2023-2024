@@ -34,7 +34,18 @@
     <button type="submit">Submit</button>
   </form>
 </template>
-<style>
+<style scoped>
+button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;

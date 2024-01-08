@@ -2,17 +2,43 @@
  <div class="salon" v-for="salon in salons"> <!-- v-for - директива для отображения списка элементов на основе массива. -->
    <div class="salon"><strong>Название:</strong> {{ salon.name }}</div>
    <div class="salon"><strong>Город:</strong> {{ salon.city }}</div>
+
  </div>
 </template>
 
 <script>
+import SalonServiceList from "@/components/SalonServiceList.vue";
+import axios from 'axios';
+
 export default {
- props: { // «Props» -- это специальное ключевое слово, обозначающее свойства . Его можно зарегистрировать в дочернем компоненте для передачи данных от родительского компонента к одному из его дочерних компонентов.
+ components: {
+   SalonServiceList
+ },
+ props: {
    salons: {
      type: Array,
      required: true
    }
+ },
+   methods: {
+    async fetchSalonServices(salonId) {
+      const url = `http://127.0.0.1:8000/salon/${salonId}/services/`;
+      axios
+        .get(url)
+        .then((response) => {
+          this.salonServices = response.data;
+          console.log(this.salonServices);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Error fetching salon services");
+        });
+  },
+},
+ mounted() {
+   this.fetchSalonServices(0) // Vue вызывает хук mount(), когда компонент добавляется в DOM.  В данном примере это позволяет вызвать fetchSalons для получения списка воинов до отрисовки страницы в браузере, благодаря этому страница загружается с уже полученными ранее данными.
  }
+
 }
 </script>
 

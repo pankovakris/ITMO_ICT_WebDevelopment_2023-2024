@@ -4,6 +4,17 @@ import './assets/main.css'
 import router from "./router";
 import axios from 'axios';
 
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+
 import { createStore } from 'vuex'
 
 // Create a new store instance.
@@ -52,7 +63,7 @@ const store = createStore({
 });
 
 
-createApp(App).use(router).use(store).mount('#app');
+createApp(App).use(router).use(store).use(vuetify).mount('#app');
 
 
 

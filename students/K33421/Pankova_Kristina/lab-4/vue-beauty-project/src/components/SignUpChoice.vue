@@ -2,8 +2,8 @@
   <div>
     <div v-if="!showForm">
       <p>Are you a customer or a business owner?</p>
-      <button @click="showCustomerForm">I am a customer</button>
-      <button @click="showOwnerForm">I am an owner</button>
+      <v-btn @click="showCustomerForm">I am a customer</v-btn>
+      <v-btn @click="showOwnerForm">I am an owner</v-btn>
     </div>
 
     <RegistrationCustomerForm v-if="showForm === 'customer'" />

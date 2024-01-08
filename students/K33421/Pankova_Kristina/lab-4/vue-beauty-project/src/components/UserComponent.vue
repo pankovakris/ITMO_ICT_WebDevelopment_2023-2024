@@ -3,7 +3,7 @@
     <div v-if="isAuthenticated">
       <!-- Show authenticated content -->
       <h1>Welcome, {{ user }}!</h1>
-      <button @click="logout">Logout</button>
+      <v-btn @click="logout">Logout</v-btn>
     </div>
     <div v-else>
       <h1>Welcome, AnonUser!</h1>

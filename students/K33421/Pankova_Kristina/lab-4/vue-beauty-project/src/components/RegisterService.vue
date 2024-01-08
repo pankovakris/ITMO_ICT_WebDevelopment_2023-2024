@@ -2,14 +2,13 @@
   <form @submit.prevent="submitForm">
     <!-- Other form fields -->
     <div>
-      <label for="owner">Owner:</label>
-      <select id="owner" v-model="salon.owner" required>
-        <option v-for="owner in owners" :value="owner.id">{{ owner.username }}</option>
+      <label for="salon">Salon:</label>
+      <select id="salon" v-model="salon" required>
+        <option v-for="salon in salons" :value="salon.id">{{ salon.name }}</option>
       </select>
       <br />
-
-    <label for="name">Name:</label>
-      <input type="text" id="name" v-model="salon.name" required>
+            <label for="name">Customer:</label>
+      <input type="text" id="customer" v-model="salon.customer" required>
     </div>
     <div>
       <label for="type">Type:</label>
@@ -29,28 +28,7 @@
   </form>
 </template>
 <style scoped>
-input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button {
+.button["submit"] {
   background-color: #04AA6D; /* Green */
   border: none;
   color: white;
@@ -61,35 +39,6 @@ button {
   font-size: 16px;
 }
 
-button[type="submit"] {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-button[type="submit"]:hover {
-  background-color: #45a049; /* Darker green */
-}
-
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
 select {
   border: 2px solid grey;
 }
@@ -97,6 +46,11 @@ input {
   border: 2px solid grey;
 }
 
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
 </style>
 
 <script>

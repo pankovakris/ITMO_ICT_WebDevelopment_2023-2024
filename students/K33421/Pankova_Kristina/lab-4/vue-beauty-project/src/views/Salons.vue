@@ -9,7 +9,7 @@
 
     <h1 class="title">Registered salons: </h1>
     <button v-on:click="fetchSalons" class="button">Get a list of all salons</button>
-    <salon-list v-bind:salons="salons" class="list" />
+    <salon-list v-bind:salons="salons" />
   </div>
 </template>
 
