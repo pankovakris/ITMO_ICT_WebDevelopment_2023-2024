@@ -75,3 +75,7 @@ nav:
       - lab-3/models.md
       - lab-3/views.md
       - lab-3/urls.md
+  - "№4: Lab 4":
+      - lab-4/components.md
+      - lab-4/views.md
+      - lab-4/main_js.md
